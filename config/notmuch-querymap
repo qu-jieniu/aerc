@@ -1,0 +1,3 @@
+pers=tag:pers and not path:local_trash/**
+work=tag:work and not path:local_trash/**
+local_trash=path:local_trash/**

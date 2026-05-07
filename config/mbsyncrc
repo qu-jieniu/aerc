@@ -1,0 +1,56 @@
+# iCloud (custom domain)
+CopyArrivalDate yes
+
+IMAPAccount icloud
+Host imap.mail.me.com
+User APPLE_ID_USERNAME
+PassCmd "tr -d '\\r\\n' < /home/aerc/.config/aerc/.icloud-app-password"
+AuthMechs LOGIN
+TLSType IMAPS
+Timeout 60
+PipelineDepth 1
+
+IMAPStore icloud-remote
+Account icloud
+
+MaildirStore icloud-local
+SubFolders Verbatim
+Path /home/aerc/Mail/icloud/
+Inbox /home/aerc/Mail/icloud/INBOX
+
+Channel icloud
+Far :icloud-remote:
+Near :icloud-local:
+Patterns * !Notes !Trash !"Sent Messages" !"Deleted Messages"
+Create Both
+Remove Near
+Expunge Both
+SyncState *
+
+# Work account (e.g. O365 via DavMail)
+IMAPAccount work
+Host mail.example.com
+Port 1143
+User you-alias@university.edu
+PassCmd "tr -d '\\r\\n' < /home/aerc/.config/aerc/.work-password"
+AuthMechs LOGIN
+TLSType None
+Timeout 60
+PipelineDepth 10
+
+IMAPStore work-remote
+Account work
+
+MaildirStore work-local
+SubFolders Verbatim
+Path /home/aerc/Mail/work/
+Inbox /home/aerc/Mail/work/INBOX
+
+Channel work
+Far :work-remote:
+Near :work-local:
+Patterns INBOX Drafts Junk Archive Sent VIP
+Create Both
+Remove Near
+Expunge Both
+SyncState *

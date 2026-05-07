@@ -1,0 +1,25 @@
+[Unit]
+Description=aerc web terminal (ttyd + screen + persistent aerc)
+After=network-online.target
+
+[Container]
+Image=localhost/aerc:latest
+ContainerName=aerc-web
+Volume=%h/.containers/aerc/config:/home/aerc/.config/aerc
+Volume=%h/.containers/aerc/mail:/home/aerc/Mail
+Volume=%h/.containers/aerc/config/mbsyncrc:/home/aerc/.mbsyncrc:ro
+Volume=%h/.containers/aerc/config/notmuch-config:/home/aerc/.notmuch-config:ro
+Volume=%h/.containers/syncthing/syncthing-data/mail-attachments:/home/aerc/mail-attachments
+UserNS=keep-id
+PublishPort=127.0.0.1:7681:7681
+Exec=sh /home/aerc/.config/aerc/scripts/web-start.sh
+
+[Service]
+Restart=always
+RestartSec=5
+TimeoutStopSec=5
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Install]
+WantedBy=default.target

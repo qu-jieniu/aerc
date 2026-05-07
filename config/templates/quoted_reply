@@ -1,0 +1,8 @@
+X-Mailer: aerc {{version}}
+
+
+On {{dateFormat (.OriginalDate | toLocal) "Jan 2, 2006 at 3:04 PM"}}, {{.OriginalFrom | names | join ", "}} <{{.OriginalFrom | emails | join ", "}}> wrote:
+
+{{trimSignature .OriginalText | quote}}
+
+

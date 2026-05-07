@@ -1,0 +1,17 @@
+[database]
+path=/home/aerc/Mail
+
+[user]
+name=Your Name
+primary_email=you@example.com
+other_email=you@gmail.com
+
+[new]
+tags=
+ignore=.mbsyncstate;.mbsyncstate.lock;.mbsyncstate.journal;.mbsyncstate.new;.uidvalidity;.uidvalidity.lock
+
+[search]
+exclude_tags=deleted;spam
+
+[maildir]
+synchronize_flags=true

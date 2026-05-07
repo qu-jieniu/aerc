@@ -1,0 +1,7 @@
+# Minimal screenrc for the aerc web session.
+# vbell off — propagate BEL as audible (xterm.js bellStyle=sound handles it).
+# No status line; container runs a single-window session.
+vbell off
+startup_message off
+defscrollback 10000
+term screen-256color

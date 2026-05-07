@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>aerc</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon.svg">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #0a0a0a; }
+  iframe { display: block; border: 0; width: 100vw; height: 100vh; }
+  #hint {
+    position: fixed; top: 8px; right: 8px;
+    background: #1c1c1c; color: #ddd;
+    padding: 6px 10px; border-radius: 6px;
+    font: 12px/1 system-ui, sans-serif;
+    opacity: 0.85; cursor: pointer; z-index: 10;
+  }
+  #hint.hidden { display: none; }
+</style>
+</head>
+<body>
+<iframe id="tty" src="/tty/" allow="fullscreen; clipboard-read; clipboard-write"></iframe>
+<div id="hint">click to capture keyboard + enable notifications</div>
+<script>
+(() => {
+  const POLL_MS = 30_000;
+  const KEY = 'aerc-unread';
+  const tty = document.getElementById('tty');
+  const hint = document.getElementById('hint');
+
+  async function grant() {
+    try { await navigator.keyboard?.lock?.(); } catch {}
+    if ('Notification' in window && Notification.permission === 'default') {
+      try { await Notification.requestPermission(); } catch {}
+    }
+    hint.classList.toggle('hidden',
+      Notification.permission !== 'default');
+    tty.focus();
+  }
+  grant();
+  document.addEventListener('click', grant);
+
+  // Poll /unread → update title + notify on increase (baseline survives refresh).
+  let last = Number(localStorage.getItem(KEY));
+  if (!Number.isFinite(last)) last = null;
+
+  async function poll() {
+    try {
+      const r = await fetch('/unread', { cache: 'no-store' });
+      if (!r.ok) return;
+      const n = parseInt((await r.text()).trim(), 10);
+      if (!Number.isFinite(n)) return;
+      document.title = n > 0 ? `aerc (${n})` : 'aerc';
+      if (last !== null && n > last && Notification.permission === 'granted') {
+        const d = n - last;
+        new Notification('aerc', {
+          body: `${d} new message${d > 1 ? 's' : ''} (${n} unread)`,
+          tag: 'aerc-new-mail',
+          renotify: true,
+        });
+      }
+      last = n;
+      localStorage.setItem(KEY, String(n));
+    } catch {}
+  }
+  setInterval(poll, POLL_MS);
+  poll();
+
+  window.addEventListener('focus', () => tty.focus());
+})();
+</script>
+</body>
+</html>

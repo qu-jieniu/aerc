@@ -1,0 +1,4 @@
+INBOX=path:icloud/INBOX/** and (to:you@gmail.com or from:you@gmail.com)
+Archive=path:icloud/Archive/** and (to:you@gmail.com or from:you@gmail.com)
+Drafts=path:icloud/Drafts/** and from:you@gmail.com
+Junk=path:icloud/Junk/** and (to:you@gmail.com or from:you@gmail.com)

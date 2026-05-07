@@ -1,0 +1,13 @@
+X-Mailer: aerc {{version}}
+
+
+---------- Forwarded message ----------
+From: {{.OriginalFrom | names | join ", "}} <{{.OriginalFrom | emails | join ", "}}>
+Date: {{dateFormat (.OriginalDate | toLocal) "Jan 2, 2006 at 3:04 PM"}}
+To: {{.OriginalHeader "To"}}
+{{if (.OriginalHeader "Cc")}}Cc: {{.OriginalHeader "Cc"}}
+{{end}}Subject: {{.OriginalHeader "Subject"}}
+
+{{.OriginalText}}
+
+

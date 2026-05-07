@@ -1,0 +1,12 @@
+X-Mailer: aerc {{version}}
+
+
+________________________________
+From: {{.OriginalFrom | names | join ", "}}
+Sent: {{dateFormat (.OriginalDate | toLocal) "Monday, January 2, 2006 3:04 PM"}}
+To: {{.OriginalHeader "To"}}
+Subject: {{.OriginalHeader "Subject"}}
+
+{{.OriginalText}}
+
+

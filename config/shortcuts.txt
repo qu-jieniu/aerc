@@ -1,0 +1,84 @@
+aerc shortcut cheatsheet                              (q to close)
+====================================================================
+
+NAVIGATION
+  j / k          next / prev message
+  g / G          first / last message
+  Ctrl+d / u     half page down / up
+  Ctrl+f / b     full page down / up
+  J / K          next / prev folder
+  H / L          collapse / expand folder
+  Ctrl+n / p     next / prev tab  (or Alt+n / p, or ]t / [t)
+
+THREADS & MARKING
+  Enter          open message
+  T              toggle thread view
+  <Tab>          fold / unfold thread
+  zc / zo        fold / unfold
+  zM / zR        fold all / unfold all
+  v  or <Space>  toggle mark (Space also advances)
+  V              mark all
+
+MESSAGE ACTIONS
+  d              move to local_trash (confirm [Y/n], Enter=yes)
+  D              move to local_trash (no prompt, silent)
+  a              move to Archive     (confirm [Y/n], Enter=yes)
+  A              archive entire thread (one [Y/n] prompt lists all files)
+  C  or  m       compose
+  rr             reply all (quoted)
+  Rr             reply (quoted)
+  f              forward               (in view)
+  b              bounce (resend)
+
+VIEWER (inside a message)
+  d / D          move to local_trash (confirm [Y/n] / silent)
+  a              move to Archive     (confirm [Y/n], Enter=yes)
+  U              browse URLs (urlscan)
+  W              save HTML, print files.example.com URL
+  S              save attachment
+  o              open attachment
+  H              toggle headers
+  Ctrl+j / k     next / prev MIME part
+  Ctrl+l         open link
+  q              close view
+
+FOLDERS & SEARCH
+  c              change folder
+  /              search in folder
+  \              filter folder            (\ + Enter clears)
+  n / N          next / prev search result
+  P              sync current account (runs check-mail-cmd + refreshes view)
+
+NOTMUCH QUERIES (archive/icloud/gmail tabs: :cf <query> or / )
+  from:alice@x.com   to:  cc:  bcc:
+  subject:invoice    subject:"quarterly report"
+  body:keyword       attachment:pdf       mimetype:image/png
+  tag:pers   tag:work   tag:unread   tag:flagged   tag:attachment
+  folder:icloud/INBOX        path:icloud/**           (recursive)
+  date:2025-01-01..2025-12-31    date:yesterday..today
+  date:2weeks..      date:..1month        date:2025-03-15
+  and / or / not    (...)    *  wildcard
+  Examples:
+    from:university.edu and date:1week..
+    attachment:pdf and from:bank
+    path:local_trash/** and date:..6months
+  Full ref: https://notmuchmail.org/manpages/notmuch-search-terms-7/
+
+MAILDIR FILTER (work tab: \ )
+  ~f alice    ~t bob    ~s subject    ~b body
+  ~d 2025-01-01..    ~T (tagged)    ~U (unread)    ~x (attachment)
+  ! to negate, e.g.  ! ~U
+
+WORK ACCOUNT
+  rr / Rr        reply with Outlook-style quote block
+
+ARCHIVE TAB
+  d              interactive delete (confirm, strip tags, move to trash)
+
+GLOBAL
+  ?              this help
+  :<command>     run aerc command
+  $ / !          terminal
+  |              pipe
+  Ctrl+c / q     quit (with prompt)
+  Ctrl+z         suspend

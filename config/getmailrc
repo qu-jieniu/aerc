@@ -1,0 +1,19 @@
+[retriever]
+type = SimplePOP3SSLRetriever
+server = pop.gmail.com
+port = 995
+username = you@gmail.com
+password_command = ("cat", "/home/aerc/.config/aerc/.gmail-app-password")
+
+[destination]
+type = Maildir
+path = /home/aerc/Mail/icloud/INBOX/
+
+[options]
+read_all = false
+delete = false
+delivered_to = false
+received = false
+message_log = /home/aerc/.config/aerc/.getmail.log
+message_log_syslog = false
+verbose = 0

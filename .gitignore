@@ -1,0 +1,24 @@
+# Mail data — never commit
+mail/
+downloads/
+~/mail-attachments/
+
+# Secrets
+config/.icloud-app-password
+config/.gmail-app-password
+config/.work-password
+config/.discord-webhook
+config/.notify.env
+
+# Runtime state
+config/oldmail-*
+config/.getmail.log
+config/.notify-uidnext-*
+config/.notify-seen-*
+config/.notify-davmail-reauth-last
+config/.sync.lock
+config/.addrbook*
+
+# Misc
+config/__pycache__/
+*.pyc

@@ -1,0 +1,16 @@
+[Unit]
+Description=aerc mail sync (getmail Gmail POP + mbsync iCloud + notmuch reindex)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.containers/aerc/sync.sh
+StandardOutput=journal
+StandardError=journal
+# Hard ceiling on one sync cycle. If DavMail (or anything else) hangs,
+# mbsync's own Timeout 60 in mbsyncrc should fire first and let the chain
+# exit cleanly. This is the last-resort kill that also releases .sync.lock,
+# so subsequent timer ticks aren't silently blocked by a dead sync.
+TimeoutStartSec=5min
+TimeoutStopSec=15s

@@ -1,0 +1,32 @@
+" aerc mail composition config
+" Loaded via: editor = vim -u /home/aerc/.config/aerc/vimrc
+set nocompatible
+syntax on
+set nobackup nowritebackup noswapfile
+
+" Sensible defaults
+set encoding=utf-8
+set fileformat=unix
+set fileformats=unix,dos
+set hidden
+set incsearch
+set ignorecase smartcase
+set wrap linebreak
+set textwidth=0
+set backspace=indent,eol,start
+set mouse=
+
+" Mail-specific: spell check on, strip CR/^M, soft-wrap at 76
+autocmd FileType mail setlocal spell spelllang=en_us
+autocmd FileType mail setlocal fileformat=unix
+autocmd FileType mail silent! %s/\r$//e
+autocmd BufEnter /tmp/aerc-* setlocal filetype=mail
+
+" Override SpellBad/SpellCap with a readable underline-only style.
+" The default ctermbg=12 ("LightRed" in vim's name table, but bright-blue
+" in xterm.js's 256-color palette) renders as a bg fill that washes out
+" the underlying text. Underline-only avoids any palette-mapping surprises.
+hi clear SpellBad
+hi clear SpellCap
+hi SpellBad  cterm=underline ctermfg=9  gui=undercurl guisp=Red
+hi SpellCap  cterm=underline ctermfg=11 gui=undercurl guisp=Yellow

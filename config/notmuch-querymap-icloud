@@ -1,0 +1,4 @@
+INBOX=path:icloud/INBOX/** and not (to:you@gmail.com or from:you@gmail.com)
+Archive=path:icloud/Archive/** and not (to:you@gmail.com or from:you@gmail.com)
+Drafts=path:icloud/Drafts/** and not from:you@gmail.com
+Junk=path:icloud/Junk/** and not (to:you@gmail.com or from:you@gmail.com)
