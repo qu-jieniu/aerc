@@ -57,15 +57,18 @@ operational notes.
 
 This setup expects a separate `postfix-relay` container that does
 envelope-From-based routing (iCloud SMTP / Gmail SMTP / DavMail) and BCCs sent
-mail back to the sender's INBOX so it threads via `mbsync`. The relay isn't in
-this repo — every account's `outgoing` line just points at it. You can either
-build your own relay or replace each account's `outgoing` with direct upstream
-SMTP and per-account `copy-to`.
+mail back to the sender's INBOX so it threads via `mbsync`. Companion repo:
+**[qu-jieniu/postfix-relay](https://github.com/qu-jieniu/postfix-relay)**.
+Every account's `outgoing` line just points at it. You can either run that
+relay or replace each account's `outgoing` with direct upstream SMTP and
+per-account `copy-to`.
 
 ## What's not included
 
 - The actual `mail/` Maildir tree (your email)
 - Credential files (`.icloud-app-password` etc.)
-- The `postfix-relay` container
 - The DavMail container (`~/.containers/davmail/`)
 - The Caddy config (`mail.example.com`, `files.example.com` reverse proxies)
+
+The `postfix-relay` is published separately at
+[qu-jieniu/postfix-relay](https://github.com/qu-jieniu/postfix-relay).
